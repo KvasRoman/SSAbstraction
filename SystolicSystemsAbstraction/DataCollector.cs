@@ -34,5 +34,14 @@ namespace SSAbstraction
             
             return line;
         }
+        public List<List<double>> GetOutputCollection()
+        {
+            List<List<double>> res = new List<List<double>>();
+            foreach(var storage in _storages)
+            {
+                res.Add(storage.Data);
+            }
+            return res;
+        }
     }
 }

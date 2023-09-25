@@ -6,6 +6,50 @@ namespace TestSS
 {
     internal class Program
     {
+        static void KSACloneTest(PElement PE)
+        {
+            PElement testPE = PE.Clone();
+            PElement testPE1 = PE.Clone();
+            PElement testPE2 = PE.Clone();
+            testPE1.ConnectTo(testPE, 0, 0);
+            testPE2.ConnectTo(testPE, 1, 0);
+            KSArray testKSArray = new KSArray(new List<PElement>() { testPE, testPE1, testPE2 });
+            KSArray testKSArrayClone = testKSArray.Clone(testKSArray);
+            testKSArray.AddInputValues(new List<List<double>>()
+            {
+                new List<double> { 1,2,3,0},
+                new List<double> { 1,2,3,0},
+                new List<double> { 1,2,3,0},
+                new List<double> { 1,2,3,0}
+            });
+            testKSArrayClone.AddInputValues(new List<List<double>>()
+            {
+                new List<double> { 1,2,3,0},
+                new List<double> { 1,2,3,0},
+                new List<double> { 1,2,3,0},
+                new List<double> { 1,2,3,0}
+            });
+            Console.WriteLine("Main");
+            testKSArray.TactStart();
+            Console.WriteLine(testKSArray.GetRegistersValues());
+            Console.WriteLine("Clone");
+            testKSArrayClone.TactStart();
+            Console.WriteLine(testKSArrayClone.GetRegistersValues());
+            Console.WriteLine("Main");
+            testKSArray.TactStart();
+            Console.WriteLine(testKSArray.GetRegistersValues());
+            Console.WriteLine("Clone");
+            testKSArrayClone.TactStart();
+            Console.WriteLine(testKSArrayClone.GetRegistersValues());
+            Console.WriteLine("Main");
+            testKSArray.TactStart();
+            Console.WriteLine(testKSArray.GetRegistersValues());
+            Console.WriteLine("Clone");
+            testKSArrayClone.TactStart();
+            Console.WriteLine(testKSArray.GetRegistersValues());
+            Console.WriteLine(testKSArrayClone.GetRegistersValues());
+            Console.WriteLine(testKSArrayClone.GetRegistersValues());
+        }
         static void Main(string[] args)
         {
             
@@ -30,9 +74,13 @@ namespace TestSS
                 new InputNode(edges[1])
             };
             PElement pe = new PElement(inputs.ToList(), outputs.ToList(), new List<Register>() { register }, new List<FunctionA2>() { funcEl });
+            KSACloneTest(pe);
+            return;
+            
             PElement pe1 = pe.Clone();
             PElement pe2 = pe.Clone();
-
+            
+            
             KSArray kSArray = new KSArray(new List<PElement>() { pe });
             kSArray.AddInputValues(new List<List<double>>()
             {

@@ -97,6 +97,42 @@ namespace SSAbstraction
                 }
             }
         }
+        public KSArray KSArrayMerge(KSArray array)
+        {
+            return new KSArray(array._array.Concat(_array).ToList());
+        }
+        public KSArray Clone(KSArray array)
+        {
+            List<PElement> peList = new List<PElement>();
+            foreach(var pe in array._array)
+            {
+                peList.Add(pe.Clone());
+            }
+            for(var i = 0;i < peList.Count; i++)
+            {
+                for(var k = 0;k < peList[i].OutNodes.Count; k++)
+                {
+                    for(var j = 0;j < array._array[i].OutNodes[k].edges.Count; j++)
+                    {
+                        var edge = array._array[i].OutNodes[k].edges[j];
+                        int arrayIndex = 0;
+                        foreach(var arrayElement in array._array)
+                        {
+                            int ToIndex;
+                            if((ToIndex = arrayElement.InNodes.FindIndex(inNode => inNode.Id == edge.To)) != -1)
+                            {
+                                peList[i].OutNodes[k].edges.Add(new Edge(peList[arrayIndex].InNodes[ToIndex]));
+                                break;
+                            }
+                            arrayIndex++;
+                        }
+                        
+                    }
+                }
+            }
+
+            return new KSArray(peList);
+        }
         public string GetRegistersValues()
         {
             string res = "";
@@ -141,6 +177,10 @@ namespace SSAbstraction
         public string GetCollectorsValues()
         {
             return _collector.GetCollectedValues();
+        }
+        public List<List<double>> GetCollectorsValuesDouble()
+        {
+            return _collector.GetOutputCollection();
         }
         public string GetRegistersValue()
         {
