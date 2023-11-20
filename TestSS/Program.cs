@@ -41,6 +41,11 @@ namespace TestSS
             Console.WriteLine("Clone");
             testKSArrayClone.TactStart();
             Console.WriteLine(testKSArrayClone.GetRegistersValues());
+
+            Console.WriteLine();
+            Console.WriteLine(testKSArray.GetCollectorsValues());
+            Console.WriteLine();
+
             Console.WriteLine("Main");
             testKSArray.TactStart();
             Console.WriteLine(testKSArray.GetRegistersValues());
@@ -49,6 +54,17 @@ namespace TestSS
             Console.WriteLine(testKSArray.GetRegistersValues());
             Console.WriteLine(testKSArrayClone.GetRegistersValues());
             Console.WriteLine(testKSArrayClone.GetRegistersValues());
+            Console.WriteLine();
+            Console.WriteLine(testKSArray.GetCollectorsValues());
+            Console.WriteLine("Main");
+            testKSArray.TactStart();
+            Console.WriteLine(testKSArray.GetRegistersValues());
+            Console.WriteLine("Clone");
+            testKSArrayClone.TactStart();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(testKSArrayClone.GetCollectorsValues());
+            Console.WriteLine();
         }
         static void Main(string[] args)
         {
@@ -76,7 +92,6 @@ namespace TestSS
             PElement pe = new PElement(inputs.ToList(), outputs.ToList(), new List<Register>() { register }, new List<FunctionA2>() { funcEl });
             KSACloneTest(pe);
             return;
-            
             PElement pe1 = pe.Clone();
             PElement pe2 = pe.Clone();
             
